@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kainos Price Scraper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <h1>Kainos Price Scraper</h1>
+    </div>
+
+    <div class="container">
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            <div class="upload-area" id="dropZone">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <h3>Drag & Drop or Click to Upload</h3>
+                <p>Upload your .txt file with URLs</p>
+                <input type="file" id="file" name="file" accept=".txt" class="file-input" required>
+            </div>
+            <div class="file-info" id="fileInfo">No file selected</div>
+            <button type="submit" class="btn" id="submitBtn" disabled>
+                <i class="fas fa-upload"></i> Upload and Process
+            </button>
+        </form>
+        <div id="errorMessage" class="error-message"></div>
+
+        <div class="instructions">
+            <h4><i class="fas fa-info-circle"></i> Instructions</h4>
+            <ul>
+                <li>Prepare a text file with one URL per line</li>
+                <li>Maximum 1000 URLs allowed</li>
+                <li>Only .txt files are accepted</li>
+                <li>URLs should be from kainos.lt</li>
+            </ul>
+        </div>
+
+        <div class="jobs-table-container">
+            <h4><i class="fas fa-tasks"></i> Processing Queue</h4>
+            <table id="jobsTable" class="jobs-table">
+                <thead>
+                    <tr>
+                        <th>Job ID</th>
+                        <th>File Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Progress</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="jobsTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="loader-container" id="loaderContainer">
+        <div class="loader-content">
+            <div class="loader"></div>
+            <h3>Processing URLs</h3>
+            <p class="processing-note">This may take several minutes depending on the number of URLs</p>
+            <div class="progress-container">
+                <div id="progressText" class="progress-text">Processed: 0/0 (0%)</div>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2024 Kainos Price Scraper | Developed for Raimonda
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
